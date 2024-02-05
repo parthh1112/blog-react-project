@@ -54,8 +54,6 @@ export class Service {
 
     }
 
-
-
     async deletePost(slug) {
         try {
             await this.databases.deleteDocument(
@@ -92,7 +90,7 @@ export class Service {
         }
     }
 
-    // file upload
+    // file 
     async uploadFile(file) {
         try {
             return await this.bucket.createFile(
@@ -105,7 +103,6 @@ export class Service {
 
         }
     }
-
 
     async deleteFile(fileId) {
         try {
@@ -120,12 +117,9 @@ export class Service {
         }
     }
 
-
-
-
-    async getFilePreview(fileId){
+    async getFilePreview(fileId) {
         try {
-            return await this.bucket.getFilePreview(conf.appwriteBucketId,fileId)
+            return await this.bucket.getFilePreview(conf.appwriteBucketId, fileId)
         } catch (error) {
             throw error
         }
