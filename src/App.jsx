@@ -1,14 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import  { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import authService from "./appwrite/auth"
 import { login, logout } from "./store/authSlice"
 import { Header, Footer } from "./components/"
-
+import { Outlet } from 'react-router-dom'
 function App() {
-
-  // console.log(import.meta.env.VITE_APPWRITE_URL)   => to take the access of environment variable
-
-
+//   // console.log(import.meta.env.VITE_APPWRITE_URL)   => to take the access of environment variable
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
   useEffect(() => {
@@ -19,12 +18,8 @@ function App() {
         }
         else {
           dispatch(logout())
-
         }
-      })
-      .catch((error) =>{
-        throw error
-      })
+      }) 
       .finally(() => setLoading(false))
   }, [])
   return (!loading) ? (
@@ -34,7 +29,7 @@ function App() {
         <Header />
         <main>
         parth
-          {/* TODO:  <Outlet /> */}
+            <Outlet />
         </main>
         <Footer />
       </div>
@@ -42,9 +37,8 @@ function App() {
 
   ) : (
     null
-  );
-
-
+  ); 
 }
 
 export default App
+ 

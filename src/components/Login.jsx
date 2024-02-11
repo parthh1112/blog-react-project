@@ -3,27 +3,27 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import { login as authLogin } from "../store/authSlice"
 import { Button, Input, Logo } from "./index"
-import { UseDispatch, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import authService from '../appwrite/auth'
 import { useForm } from "react-hook-form"
 
 function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { register, handleSubmit } = useForm()
-    const { error, setError } = useState()
+    const { register, handleSubmit } = useForm() // new hook 
+    const [error, setError] = useState("")
     const login = async (data) => {
         setError("")
         try {
             const session = await authService.login(data)
             if (session) {
                 const userData = await authService.getCurrentUser()
-                if (userData) {
+                if (userData)
                     dispatch(authLogin(userData))
-                    navigate("/")
-                }
+                navigate("/")
             }
-        } catch (error) {
+        }
+        catch (error) {
             setError(error.message)
         }
     }
@@ -50,15 +50,13 @@ function Login() {
                     <div className='space-y-5'>
                         <Input
                             lable="Email-> "
-                            placeholder="Enter youru email here"
                             type="email"
-                            {...register("email", {
+                            placeholder="Enter your email here"
+                            {
+                            ...register("email", {
                                 required: true,
-                                validate: {
-                                    matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                                        "Email address must be a valid address",
-                                }
-                            })}
+                            })
+                            }
                         />
                         <Input
                             label="Password: "

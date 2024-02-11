@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import authService from '../appwrite/auth'
-import { Link,  useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button, Input, Logo } from "./index"
 import { login } from "../store/authSlice"
-import { UseDispatch, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 
 function Signup() {
@@ -53,6 +53,7 @@ function Signup() {
                     <div className='space-y-5'>
                         <Input
                             label="Full Name: "
+                            type="text"
                             placeholder="Enter your full name"
                             {...register("name", {
                                 required: true,
@@ -64,10 +65,6 @@ function Signup() {
                             type="email"
                             {...register("email", {
                                 required: true,
-                                validate: {
-                                    matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                                        "Email address must be a valid address",
-                                }
                             })}
                         />
                         <Input

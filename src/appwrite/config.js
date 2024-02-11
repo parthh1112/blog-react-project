@@ -76,7 +76,7 @@ export class Service {
         );
     }
 
-    async getPost() { // querying the documents
+    async getPosts() { // querying the documents
         try {
             return this.databases.listDocuments(
                 conf.appwriteDatabaseId,
